@@ -26,7 +26,7 @@ const CardWrapper = styled.div({
     alignItems: "center",
     display: "flex",
     flexDirection: "column",
-    height: "100vh",
+    height: "calc(100vh - 174px)",
     justifyContent: "center",
     width: "100vw",
 });
@@ -52,7 +52,7 @@ const StyledButton = styled.button({
 })
 
 
-export default function About () {
+export default function Toki () {
     
     const [cardNumber, setCardNumber] = useState(0);
     const [corretlyAnswered, setCorrectlyAnswered] = useState(false);
