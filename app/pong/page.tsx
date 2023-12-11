@@ -1,18 +1,14 @@
 "use client";
 
-import React from "react";
+import React, {useEffect, useRef, useState} from "react";
 import * as THREE from "three";
-import { Canvas } from "@react-three/fiber";
+import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei"
 import { styled } from 'styled-components';
 
 
 const WIDTH = 700,
 HEIGHT = 500,
-VIEW_ANGLE = 45,
-ASPECT = WIDTH / HEIGHT,
-NEAR = 0.1,
-FAR = 10000,
 FIELD_WIDTH = 1200,
 FIELD_LENGTH = 3000,
 BALL_RADIUS = 20,
@@ -37,7 +33,6 @@ const Wrapper = styled.div({
     backgroundColor: '#4e246c',
 });
 
-
 const Paddle = ({zPos}) => {
     const paddleGeometry = new THREE.BoxGeometry(PADDLE_WIDTH, PADDLE_HEIGHT, PADDLE_DEPTH);
     const paddleMaterial = new THREE.MeshLambertMaterial({ color: 0xffffff });
@@ -49,13 +44,31 @@ const Paddle = ({zPos}) => {
     );
 };
 
+
 const Ball = () => {
+    const vector = useRef({x: 5, z: 5}); // [x, y]
+    const ballRef = useRef<THREE.Mesh>();
     const ballGeometry = new THREE.SphereGeometry(BALL_RADIUS, 40, 40);
     const ballMaterial = new THREE.MeshLambertMaterial({ color: 0xffffff });
-    const ball = new THREE.Mesh(ballGeometry, ballMaterial); // Create a mesh using ballGeometry and ballMaterial
+    const ball = new THREE.Mesh(ballGeometry, ballMaterial);
     ball.position.set(0, 0, 0);
+
+    useFrame((state,delta) => {
+        //If ball position hits the wall, change the direction
+        if (ballRef.current) {
+            if ((ballRef.current.position.x + 10) >= FIELD_WIDTH / 2 || (ballRef.current.position.x - 10) <= -FIELD_WIDTH / 2) {
+                vector.current = {x: -vector.current.x, z: vector.current.z};
+            }
+            if ((ballRef.current.position.z + 10) >= FIELD_LENGTH / 2 || (ballRef.current.position.z - 10) <= -FIELD_LENGTH / 2) {
+                vector.current = {x: vector.current.x, z: -vector.current.z};
+            }
+            ballRef.current.position.x += vector.current.x;
+            ballRef.current.position.z += vector.current.z;
+         }
+    });
+
     return (
-        <primitive object={ball} />
+        <primitive ref={ballRef} object={ball} />
     );
 };
 
@@ -79,9 +92,10 @@ const Light = () => {
     );
 };
 
+
 export default function Pong() {
     const camera = new THREE.PerspectiveCamera(45, 1.75, 0.1, 10000);
-    camera.position.set(1000, 2500, 0);
+    camera.position.set(1000, 2800, 0);
 
 
     return (
@@ -89,7 +103,7 @@ export default function Pong() {
             <Score>Player: 0 | AI: 0 </Score>
             <Canvas camera={camera}>
                 <Light />
-                <OrbitControls onChange={(event) => console.log(camera)}/>
+                <OrbitControls />
                 <Paddle zPos={FIELD_LENGTH / 2}/>
                 <Paddle zPos={-FIELD_LENGTH / 2}/>
                 <Ball />
