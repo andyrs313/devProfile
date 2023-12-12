@@ -155,7 +155,7 @@ const FanStand = () => {
 
     //Add waving flags to flagpoles
     const flagGeometry = new THREE.BoxGeometry(2, 40, 55);
-    const flagMaterialA = new THREE.MeshBasicMaterial({color: 0x0000cc, side: THREE.DoubleSide});
+    const flagMaterialA = new THREE.MeshBasicMaterial({color: 0x298fec, side: THREE.DoubleSide});
     const flagMaterialB = new THREE.MeshBasicMaterial({color: 0xd0d011, side: THREE.DoubleSide});
     const flagA = new THREE.Mesh(flagGeometry, flagMaterialA);
     const flagB = new THREE.Mesh(flagGeometry, flagMaterialB);

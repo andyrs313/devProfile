@@ -22,7 +22,7 @@ export const FlashCard = ({frontText, backText, fontSize = 48}) => {
         <div>
             <ReactCardFlip isFlipped={isFlipped} flipDirection="vertical">
                 <CardFace style={{fontSize: fontSize}} onClick={()=> setIsFlipped(!isFlipped)}>{frontText}</CardFace>
-                <CardFace onClick={()=> setIsFlipped(!isFlipped)}>{backText}</CardFace>
+                <CardFace style={{fontSize: (fontSize / 2)}} onClick={()=> setIsFlipped(!isFlipped)}>{backText}</CardFace>
             </ReactCardFlip>
         </div>
     )

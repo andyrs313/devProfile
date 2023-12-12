@@ -24,6 +24,7 @@ const ButtonWrapper = styled.div({
 
 const CardWrapper = styled.div({
     alignItems: "center",
+    backgroundColor: "#ddd",
     display: "flex",
     flexDirection: "column",
     height: "calc(100vh - 174px)",
@@ -61,7 +62,7 @@ export default function Toki () {
         <FlashCard 
             key={card.front} 
             frontText={card.front} 
-            backText={card.back} 
+            backText={card.back.join(", ")} 
         />
     );
 
@@ -101,7 +102,7 @@ export default function Toki () {
 
     const checkInput = (event) => {
         console.log(event);
-        if (event.target.value === tokiPonaList[cardNumber].back) {
+        if (tokiPonaList[cardNumber].back.includes(event.target.value)) {
             setCorrectlyAnswered(true);
         }
     };
