@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { ArrowLeft, ArrowRight } from "react-feather";
+import { ArrowLeft, ArrowRight, CheckCircle } from "react-feather";
 import { FlashCard } from "../components/flashcards/flashcard";
 import { styled } from 'styled-components';
 import { tokiPonaList } from "../constants/toki-pona-list";
@@ -10,6 +10,7 @@ const AnswerInput = styled.input({
     fontSize: "24px",
     color: "black",
     marginTop: "20px",
+    paddingLeft: "10px",
     width: "400px",
 });
 
@@ -32,6 +33,10 @@ const CardWrapper = styled.div({
     width: "100vw",
 });
 
+const InputWrapper = styled.div({
+
+});
+
 const StyledButton = styled.button({
     backgroundColor: "#3f51b5",
     borderRadius: "5px",
@@ -50,12 +55,24 @@ const StyledButton = styled.button({
       cursor: "default",
       opacity: 0.7,
     }
-})
+});
+
+const StyledCheckCircle = styled(CheckCircle)({
+    color: "green",
+    float: "right",
+    height: "30px",
+    position: "relative",
+    width: "30px",
+    marginLeft: "-60px",
+    marginTop: "24px",
+    marginRight: "4px"
+});
 
 
 export default function Toki () {
     
-    const [cardNumber, setCardNumber] = useState(0);
+    const [cardNumber, setCardNumber] = useState(Math.floor(Math.random() * tokiPonaList.length));
+    const [guess, setGuess] = useState("");
     const [corretlyAnswered, setCorrectlyAnswered] = useState(false);
 
     const TokiFlashcards = () => tokiPonaList.map((card) => 
@@ -67,6 +84,7 @@ export default function Toki () {
     );
 
     const onNewCard = () => {
+        setGuess("");
         setCorrectlyAnswered(false);
     };
 
@@ -101,8 +119,8 @@ export default function Toki () {
     }
 
     const checkInput = (event) => {
-        console.log(event);
-        if (tokiPonaList[cardNumber].back.includes(event.target.value)) {
+        setGuess(event.target.value);
+        if (tokiPonaList[cardNumber].back.includes(event.target.value.toLowerCase())) {
             setCorrectlyAnswered(true);
         }
     };
@@ -111,12 +129,12 @@ export default function Toki () {
 
     return(
         <CardWrapper
-            style={{
-                backgroundColor: corretlyAnswered ? "green" : "",
-            }}
         >
             {CurrentFlashcard}
-            <AnswerInput type="text" onInput={checkInput} autoFocus={true} placeholder="English translation..."/>
+            <InputWrapper>
+                <AnswerInput id={`card-${cardNumber}`} type="text" onInput={checkInput} autoFocus={true} placeholder="English translation..." value={guess}/>
+                {corretlyAnswered && <StyledCheckCircle/>}
+            </InputWrapper>
             <ButtonWrapper>
                 <StyledButton onClick={previousFlashcard}><ArrowLeft/></StyledButton>
                 <StyledButton onClick={randomFlashcard}>Random</StyledButton>

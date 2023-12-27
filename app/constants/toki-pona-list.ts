@@ -101,7 +101,7 @@ export const tokiPonaList = [
     },
     {
         front: "kepeken",
-        back: ["use", "use", "use"]
+        back: ["use", "with", "by means of"]
     },
     {
         front: "kili",
