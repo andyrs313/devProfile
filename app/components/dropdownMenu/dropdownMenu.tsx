@@ -61,6 +61,9 @@ const DropdownMenu = ({children}) => {
           <li>
             <a href="/pong">ThreeJs Pong</a>
           </li>
+          <li>
+            <a href="/firefighter-application">Application Wizard</a>
+          </li>
         </Dropdown>
       )}
     </>

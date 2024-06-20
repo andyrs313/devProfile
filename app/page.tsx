@@ -5,6 +5,8 @@ import Image from 'next/image'
 import { styled } from 'styled-components';
 import { StickyNote } from '../app/components/stickynote/stickynote';
 import { sellingPoints } from './constants/sellingPoints';
+import { useState } from 'react';
+import '@radix-ui/themes/styles.css';
 
 
 const Main = styled.main({
@@ -20,6 +22,7 @@ const ImageWrapper = styled.div({
 
 
 const StickyNotes = () => {
+  const [topZIndex, setTopZIndex] = useState(0);
 
   return (
     <div>
@@ -32,6 +35,11 @@ const StickyNotes = () => {
             ypos={quote.yPos}
             zIndex={quote.zIndex}
             key={index}
+            onClick={() => {
+              setTopZIndex(topZIndex ? topZIndex + 1 : sellingPoints.length + 1);
+              console.log(topZIndex);
+            }}
+            topZIndex = {topZIndex}
           />
         )
       })}

@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
+import '@radix-ui/themes/styles.css';
+import { Theme } from '@radix-ui/themes';
 import StyledComponentsRegistry from './lib/registry'
 import { Footer } from './components/footer/footer'
 import { TopNav } from './components/topnav/topnav'
@@ -21,11 +23,13 @@ export default function RootLayout({
     <html lang="en">
 
       <body className={inter.className}>
-        <StyledComponentsRegistry>
-          <TopNav/>
-          {children}
-          <Footer/>
-        </StyledComponentsRegistry>
+        <Theme>
+          <StyledComponentsRegistry>
+            <TopNav/>
+            {children}
+            <Footer/>
+          </StyledComponentsRegistry>
+        </Theme>
       </body>
     </html>
   )
