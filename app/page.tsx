@@ -37,7 +37,6 @@ const StickyNotes = () => {
             key={index}
             onClick={() => {
               setTopZIndex(topZIndex ? topZIndex + 1 : sellingPoints.length + 1);
-              console.log(topZIndex);
             }}
             topZIndex = {topZIndex}
           />

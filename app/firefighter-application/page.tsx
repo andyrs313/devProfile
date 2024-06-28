@@ -2,6 +2,8 @@
 import React from "react";
 import { useState } from "react";
 import { Button, TextField } from "@radix-ui/themes";
+import * as Checkbox from '@radix-ui/react-checkbox';
+import { Check } from "react-feather";
 import FeatherIcon from 'feather-icons-react';
 import { PDFDocument } from 'pdf-lib';
 import { styled } from 'styled-components'
@@ -44,6 +46,26 @@ const FieldLong = styled.div({
   gridColumn: "span 3",  
 });
 
+const Flex = styled('div')({ display: 'flex' });
+
+const CheckboxHeader = styled('label')({
+  marginLeft: '8px',
+})
+
+const CheckboxRoot = styled(Checkbox.Root)({
+  all: 'unset',
+  backgroundColor: 'white',
+  width: 25,
+  height: 25,
+  borderRadius: 4,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  boxShadow: `0 1px 6px gray`,
+  '&:hover': { backgroundColor: '#f1f3f7' },
+  '&:focus': { boxShadow: `0 0 0 2px gray` },
+});
+
 const formFieldMap = {
   "Text1": "position",
   "Text2": "firstName",
@@ -56,6 +78,8 @@ const formFieldMap = {
   "Text9": "email",
   "Text10": "phone",
   "Text11": "altPhone",
+  "Check Box12": "currentEmployee",
+  "Check Box13": "formerEmployee",
   /*"Check Box12": "currentEmployee",
   "Check Box13": "formerEmployee",
   "Text16": "formerEmployeeDepartment",
@@ -348,8 +372,30 @@ export default function Form() {
       );
       case 2:
       return (
-        <div className ="form-field">
-        </div>
+        <Grid>
+          <FieldLong>
+            <Flex>
+              <CheckboxRoot className="CheckboxRoot" id="current-employee" onChange={(e) => setApplicationInfoProp("currentEmployee", e.currentTarget.value)}>
+                <Checkbox.Indicator className="CheckboxIndicator">
+                  <Check color="#1f2d5c"/>
+                </Checkbox.Indicator>
+              </CheckboxRoot>
+              <CheckboxHeader className="field-header" htmlFor="curent-employee">Current employee?</CheckboxHeader>
+            </Flex>
+          </FieldLong>
+          <FieldLong>
+            <Flex>
+              <CheckboxRoot className="CheckboxRoot" id="former-employee" onChange={(e) => {
+                setApplicationInfoProp("formerEmployee", e.currentTarget.value);
+                console.log(e.currentTarget.value)}}>
+                <Checkbox.Indicator className="CheckboxIndicator">
+                  <Check color="#1f2d5c"/>
+                </Checkbox.Indicator>
+              </CheckboxRoot>
+              <CheckboxHeader className="field-header" htmlFor="former-employee">Former employee?</CheckboxHeader>
+            </Flex>
+          </FieldLong>
+        </Grid>
       );
       case 3:
       return (
@@ -376,8 +422,13 @@ export default function Form() {
 
     console.log(form.getFields());
     for (const [key, value] of Object.entries(formFieldMap)) {
-      const field = form.getTextField(key);
-      field.setText(applicationInfo[value]);
+      if (/Text.*/.test(key)) {
+        const field = form.getTextField(key);
+        field.setText(applicationInfo[value]);
+      } else if (/Check.*/.test(key) && applicationInfo[value] === true) {
+        const field = form.getCheckBox(key);
+        field.check();
+      }
     }
 
     const pdfBytes = await pdfDoc.save();
@@ -399,12 +450,13 @@ export default function Form() {
       {getContent()}
 
       <Grid>
-        <Button onClick={() => setPage(page - 1)} disabled={page === 1}><FeatherIcon icon="arrow-left"/> Previous</Button>
+        {/*<Button onClick={() => setPage(page - 1)} disabled={page === 1}><FeatherIcon icon="arrow-left"/> Previous</Button>*/}
         <div/>
-        {page !== 4 ? 
+        {/*page !== 4 ? 
           <Button onClick={() => setPage(page + 1)}>Next <FeatherIcon icon="arrow-right"/></Button> :
           <Button onClick={() => download()}>Download</Button>
-        }
+        */}
+        <Button onClick={() => download()}>Download</Button>
       </Grid>
     </WizardWrapper>
   );

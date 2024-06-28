@@ -1,15 +1,30 @@
 "use client"
-import React, {useState} from "react";
+import React from "react";
+import { styled } from "styled-components";
+
+const Wrapper = styled.div({
+    margin: "24px"
+});
+
+const Header = styled.div({
+    fontSize: "30px",
+    fontWeight: "bold"
+});
 
 export default function Contact() {
 
     return (
-        <div>
-            <h1>Contact</h1>
-            <p>Phone: 555-555-5555</p>
+        <Wrapper>
+            <Header>Contact</Header>
+            <p>Address: 
+                <a href="https://www.google.com/maps/place/Hudsonville,+MI+49426"> Wherever there is danger</a>
+            </p>
+            <p>Phone: 
+                <a href="tel:+6163414482"> 616-341-4482</a>
+            </p>
             <p>Email:
                 <a href="mailto:dande313@gmail.com"> dande313@gmail.com</a>
             </p>
-        </div>
+        </Wrapper>
     );
 };

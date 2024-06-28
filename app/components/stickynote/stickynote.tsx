@@ -43,7 +43,7 @@ export const StickyNote = ({quote, author = "", color, xpos = 0, ypos = 0, zInde
 
     const onMouseDown = () => {
         onClick && onClick();
-        setZIndexState(topZIndex);
+        setZIndexState(topZIndex || 6);
     };
 
     return(
