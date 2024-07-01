@@ -44,7 +44,6 @@ export const TopNav = () => {
                 <NavButton href="/">Home</NavButton>
                 <DropdownMenu>Projects</DropdownMenu>
                 <NavButton href="/about">About</NavButton>
-                <NavButton href="/contact">Contact</NavButton>
             </NavButtonWrapper>
         </Nav>
     );
