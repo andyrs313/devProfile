@@ -24,7 +24,7 @@ export default function About() {
             {`Hello! My name is Allen Anderson. I am a resident of Hudsonville, Michigan.`} <br/>
             {`I am a software developer with ${new Date().getFullYear() - 2014} years experience and I am currently looking for a job. I am proficient in JavaScript, TypeScript, React, Node.js, C#, and .NET.`} <br/>
             {`People over money.`} <br/>
-            {`Laughter a virtue.`} <br/>
+            {`Laughter is a virtue.`} <br/>
             {`I am also a you.`} <br/>
             <Link href="/Resume-Allen-Anderson.pdf" target="_blank">Click here to download my resume</Link>
         </Wrapper>
