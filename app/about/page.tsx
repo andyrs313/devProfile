@@ -22,7 +22,7 @@ export default function About() {
     return (
         <Wrapper>
             {`Hello! My name is Allen Anderson. I am a resident of Hudsonville, Michigan.`} <br/>
-            {`I am a software developer with ${new Date().getFullYear() - 2014} years experience and I am currently looking for a job. I am proficient in JavaScript, TypeScript, React, Node.js, C#, and .NET.`} <br/>
+            {`I am a software developer with ${new Date().getFullYear() - 2017} years experience and I am currently looking for a career change. My ideal position would be in project leadership and management. I am passionate about people. I am proficient in JavaScript, TypeScript, React, Next.js, and Node. I can furnish referrals upon request.`} <br/>
             {`People over money.`} <br/>
             {`Laughter is a virtue.`} <br/>
             {`I am also a you.`} <br/>
