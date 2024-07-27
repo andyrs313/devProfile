@@ -11,6 +11,8 @@ import '@radix-ui/themes/styles.css';
 
 const Main = styled.main({
   backgroundColor: "white",
+  backgroundImage: 'url("clouds.png")',
+  backgroundSize: "cover",
   height: "calc(100vh - 174px)",
 });
 
