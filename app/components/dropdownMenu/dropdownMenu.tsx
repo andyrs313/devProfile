@@ -11,7 +11,7 @@ const Dropdown = styled.ul({
   minWidth: "160px",
   top: "74px",
   marginLeft: "100px",
-  zIndex: 1,
+  zIndex: 101,
   "& li": {
     backgroundColor: "#f0f0f0",
     display: "block",
